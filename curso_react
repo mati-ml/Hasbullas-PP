@@ -1,0 +1,46 @@
+Que necesito saber : HTML CSS JAVA
+Hay que usar typescripp-> permite poner más de un tipo de  elemento 
+Que es react?
+    Libreria de java para front-end
+React tmbn permite trabajar con objs dinamicos
+como trabaja tienes la app(raices del arbol)-> mensaje (hojas )
+esto crea un "ambiente" virtual y va comparando los nodos, la app depende de react y react dom
+Libreria-> funcionalidad especifica
+framework-> herramientas completas
+Building components
+    Crear una lista basica de funciones
+    puedes hacer constantes con condicionales -> si se cumplen tal condición muestra algo si no se cumple muestra otra cosa
+
+    props-> inputs, inmutable
+    state- variables loca
+
+
+
+    import ListGroup from "./Components/ListGroup";
+
+function App() {
+  // Assuming you want to display the English list by default
+  const selectedLanguage = "en"; // Change this to "es" for Spanish
+
+  const items = {
+    en: ["Internship Regulations", "Internship Registration", "Guide Professors", "Internship Rubric", "Evaluations"],
+    es: ["Reglamento de pasantías", "Inscripción de pasantías", "Profesores Guía", "Rúbrica de pasantías", "Evaluaciones"]
+  };
+
+  const handleSelectItem = (item: string) => {
+    console.log(item);
+  };
+
+  return (
+    <div>
+      <div style={{backgroundColor: 'blue', padding: '10px'}}>
+        <h2 style={{color: 'white'}}>Inicio de Sesión</h2>
+      </div>
+      <div>
+        <ListGroup items={items[selectedLanguage]} heading="Menu" onSelectItem={handleSelectItem} />
+      </div>
+    </div>
+  );
+}
+
+export default App;

@@ -1,0 +1,39 @@
+
+Descripción general
+
+Esta es la documentación de la aplicación React para pasantías. La aplicación permite a los usuarios registrados acceder a una lista de recursos relacionados con las pasantías, 
+como el reglamento, la inscripción y evaluaciones. Para acceder a estos recursos, el usuario debe iniciar sesión con su nombre de usuario y contraseña.
+
+Librerías utilizadas
+
+    React: Librería JavaScript para construir interfaces de usuario.
+    ListGroup: Componente personalizado que renderiza una lista con opciones seleccionables.
+
+Estado del componente principal (App)
+
+    selectedLanguage: (string) Idioma seleccionado por defecto (en' para inglés, 'es' para español).
+    items: (object) Contiene las traducciones de los nombres de los ítems de la lista para cada idioma ('en' e 'es').
+    links: (object) Contiene los enlaces para cada ítem de la lista para cada idioma ('en' e 'es').
+    username: (string) Nombre de usuario ingresado en el formulario de login.
+    password: (string) Contraseña ingresada en el formulario de login.
+    isLoggedIn: (boolean) Indica si el usuario ha iniciado sesión exitosamente.
+
+Funciones del componente principal (App)
+
+    handleLogin: Realiza la petición de login al servidor e inicia sesión en caso de éxito.
+    handleSelectItem: Maneja la selección de un ítem de la lista. Abre el enlace correspondiente en una nueva pestaña para el primer elemento ("Internship Regulations" - 
+        Reglamento de pasantías). Se espera una implementación específica para manejar los otros elementos de la lista.
+    handleLogout: Cierra la sesión del usuario.
+    createListItem: Crea un elemento de la lista con el texto y el enlace correspondiente.
+
+Estructura del componente
+
+El componente principal App renderiza condicionalmente el formulario de login o la lista de recursos según el estado isLoggedIn.
+
+    Formulario de login (Sección visible si isLoggedIn es falso)
+        Muestra un formulario con campos para el nombre de usuario y contraseña.
+        El botón "Iniciar Sesión" llama a la función handleLogin.
+    Sección de recursos (Sección visible si isLoggedIn es verdadero)
+        Muestra el componente ListGroup con los ítems de la lista para el idioma seleccionado (selectedLanguage).
+        El componente ListGroup recibe los ítems (items), el encabezado (heading), y la función a llamar al seleccionar un ítem (onSelectItem).
+        Se muestra un botón "Salir (Logout)" que llama a la función handleLogout.
