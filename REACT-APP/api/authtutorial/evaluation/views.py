@@ -129,3 +129,33 @@ def update_pasantias(request):
 
     # Retornar una respuesta JSON indicando que la actualización fue exitosa
     return JsonResponse({'message': 'Pasantia actualizada correctamente'}, status=200)
+def get_column_value(request):
+    # Obtener el ID de la solicitud del cuerpo de la solicitud
+    request_data = json.loads(request.body)
+    id = request_data.get('id')
+
+    if not id:
+        return JsonResponse({'message': 'No se proporcionó el ID'}, status=400)
+
+    # Filtrar la instancia de Eval asociada al ID
+    try:
+        eval_instance = Eval.objects.get(id=id)
+    except Eval.DoesNotExist:
+        return JsonResponse({'message': 'No se encontró una instancia de Eval con el ID especificado'}, status=404)
+
+    # Obtener el nombre de la columna de la solicitud
+    column_name = request_data.get('columna')
+
+    if not column_name:
+        return JsonResponse({'message': 'No se proporcionó el nombre de la columna'}, status=400)
+
+    # Validar el nombre de la columna
+    valid_columns = ['evaluacion', 'comentarios', 'pasantia','estado']
+    if column_name not in valid_columns:
+        return JsonResponse({'message': 'El nombre de la columna proporcionado no es válido'}, status=400)
+
+    # Obtener el valor de la columna especificada
+    column_value = getattr(eval_instance, column_name)
+
+    # Retornar una respuesta JSON con el valor de la columna
+    return JsonResponse({'valor': column_value}, status=200)
