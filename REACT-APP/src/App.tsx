@@ -1,3 +1,33 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import RoleBasedRoute from './components/RoleBasedRoute';
+import Login from './components/Login';
+import AdminDashboard from './components/AdminDashboard';
+import TeacherDashboard from './components/TeacherDashboard';
+import StudentDashboard from './components/StudentDashboard';
+
+const App: React.FC = () => {
+  return (
+    <AuthProvider>
+      <Router>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <ProtectedRoute path="/dashboard" component={Dashboard} />
+          <RoleBasedRoute path="/admin/dashboard" component={AdminDashboard} allowedRoles={['admin']} />
+          <RoleBasedRoute path="/teacher/dashboard" component={TeacherDashboard} allowedRoles={['teacher']} />
+          <RoleBasedRoute path="/student/dashboard" component={StudentDashboard} allowedRoles={['student']} />
+          <Route path="/not-authorized" component={() => <h1>Not Authorized</h1>} />
+        </Switch>
+      </Router>
+    </AuthProvider>
+  );
+};
+
+export default App;
+
+/*
 import React, { useState } from "react";
 import ListGroup from "./Components/ListGroup";
 
@@ -38,17 +68,7 @@ function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  /* 
-  const handleLogin = () => {
-    // Perform validation or authentication logic here
-    // For simplicity, I'm just checking if both fields are filled
-    if (username === "manu" && password === "manu123") {
-      setIsLoggedIn(true);
-    } else {
-      alert("Por favor, introduce un nombre de usuario y contraseña.");
-    }
-  };
-*/
+
 const handleLogin = () => {
   // Form data
   const formData = new FormData();
@@ -90,14 +110,7 @@ const handleLogin = () => {
       console.log(item); // Handle other items as needed
     }
   };
-/*
-  const handleLogout = () => {
-    // Implement logout logic (e.g., clear session data)
-    setIsLoggedIn(false);
-    setUsername(""); // Clear username on logout
-    setPassword(""); // Clear password on logout
-  };
-*/
+
 
 const handleLogout = async () => {
   try {
@@ -180,3 +193,4 @@ const handleLogout = async () => {
 }
 
 export default App;
+*/
